@@ -1,3 +1,7 @@
+import { cart } from "../data/cart.js";
+import { products } from "../data/products.js";
+
+
 let productHTML='';
 
 products.forEach((product) => {
@@ -40,7 +44,7 @@ products.forEach((product) => {
 
     <div class="product-spacer"></div>
 
-    <div class="added-to-cart">
+    <div class="added-to-cart js-${product.id}">
         <img src="images/icons/checkmark.png">
         Added
     </div>
@@ -61,6 +65,13 @@ document.querySelectorAll(".add-to-cart-button").forEach((button)=>{
         const productId= button.dataset.productId;
         let matchingTest;
         let cartquantityheader=0;
+        const addedMessage=document.querySelector(`.js-${productId}`);
+        addedMessage.classList.add('add-to-cart-opacity');
+        setTimeout(()=>{
+            addedMessage.classList.remove('add-to-cart-opacity')
+        },2000);
+
+
     cart.forEach((product)=>{
         if(productId===product.productId){
             matchingTest=product;
@@ -77,7 +88,7 @@ document.querySelectorAll(".add-to-cart-button").forEach((button)=>{
             quantity:quantity
         });
         }
-
+        
         cart.forEach((product)=>{
             cartquantityheader+=product.quantity;
         })
