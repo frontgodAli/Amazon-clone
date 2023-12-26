@@ -1,16 +1,17 @@
-import { cart ,addToCart } from "../data/cart.js";
+import { cart ,addToCart,calculateCartQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatPrice } from "./utils/money.js";
 
 
+
+updateCartQuantity();
+
 let productHTML='';
 
 function updateCartQuantity(){
-    let cartquantityheader=0;
-    cart.forEach((cartItem)=>{
-        cartquantityheader+=cartItem.quantity;
-    })
-    document.querySelector('.cart-quantity').innerHTML=cartquantityheader;
+    const cartQuantity=calculateCartQuantity();
+    document.querySelector('.cart-quantity').innerHTML=`${cartQuantity}`;
+    
 }
 
 products.forEach((product) => {
